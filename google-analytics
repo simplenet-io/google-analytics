@@ -1,0 +1,25 @@
+<?php
+/*
+Plugin Name: Google Analytics
+Description: Adds Google Analytics tracking code to your WordPress website.
+Version: 1.0
+Author: Andrei Chira
+*/
+
+// Add Google Analytics tracking code to the footer
+function add_google_analytics_code() {
+    $tracking_id = 'UA-XXXXXXXXX-X'; // Replace this with your Google Analytics Tracking ID
+    if ($tracking_id) {
+        ?>
+        <script async src="https://www.googletagmanager.com/gtag/js?id=<?php echo $tracking_id; ?>"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+        
+            gtag('config', '<?php echo $tracking_id; ?>');
+        </script>
+        <?php
+    }
+}
+add_action('wp_footer', 'add_google_analytics_code');
